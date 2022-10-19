@@ -19,7 +19,7 @@ You will then need to follow those steps:
 
 ### GitHub settings
 
-- Go to the <a href="../../settings" target="_blank">Settings tab</a>:
+- Go to the <img src="../../settings" alt="Settings tab"></img>:
   - Under the General section, tick the "Template repository" box so that the competitors can easily make a copy of the simulation files
   - Go to <a href="../../settings/actions" target="_blank">Actions settings tab</a> and make sure that the "Allow all actions and reusable workflow" permission is activated. This allows the different automation scripts to do their job. If it is not the case, set it correctly and save the setting
 - You will need to setup a GitHub secret to be able to fetch your competitors' controllers:
