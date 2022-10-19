@@ -40,7 +40,7 @@ Replace/add all the files needed for your Webots simulation at the root of the r
   - metric: should be one of "percent", "time-speed", "time-duration" or "distance". It depends on how the performance is evaluated
   - dockerCompose: it is a special path used by the integrated IDE and GitHub actions to locate the default controller. Change "edit_me" to the name of your main controller
   - Don't forget to commit your changes to save them
-- Replace the three files of the <img src="/preview" alt="preview folder"></img> with an example animation of your benchmark <img src="https://cyberbotics.com/doc/guide/web-animation" alt="recorded from Webots"></img>. Keep the same names for the files: animation.json, scene.x3d and thumbnail.jpg. <img src="../../upload/main/preview" alt="Click here"></img> to upload the new files from the web interface if that is more convenient for you. 
+- Replace the three files of the <img src="/preview" alt="preview folder"></img> with an example animation of your benchmark [recorded from Webots](https://cyberbotics.com/doc/guide/web-animation). Keep the same names for the files: animation.json, scene.x3d and thumbnail.jpg. <img src="../../upload/main/preview" alt="Click here"></img> to upload the new files from the web interface if that is more convenient for you. 
 
 ### README update
 
@@ -57,7 +57,7 @@ Update the <img src="../../edit/main/README.md" alt="README file"></img>:
 - Replace the two occurrences of "ORGANIZER_NAME" in the "How to participate" section with your GitHub username and one "ORGANIZER_REPOSITORY" with your repository name
 - Don't forget to commit your changes to save them
 
-You can submit your benchmark to <img src="https://benchmark.webots.cloud/benchmark" alt="webots.cloud"></img> to share it with other people. Then you are on the website on the "Benchmark" tab, click on "Add a new benchmark" and enter the URL to your .wbt world file located in the <img src="./worlds" alt="worlds folder"></img>
+You can submit your benchmark to [webots.cloud](https://benchmark.webots.cloud/benchmark) to share it with other people. Then you are on the website on the "Benchmark" tab, click on "Add a new benchmark" and enter the URL to your .wbt world file located in the <img src="./worlds" alt="worlds folder"></img>
 
 - When you have submitted your benchmark to webots.cloud, change the link of the shield badge at the top of the <img src="../../edit/main/README.md" alt="README file"></img> to the correct webots.cloud page. You will then be able to easily go to the webots.cloud site to see your updated changes and your competitors will have a handy link to the current leaderboard
 
@@ -120,5 +120,5 @@ Everything should be good to go, you can modify the main controller files in the
 
 The supervisor controller is the special controller that is used to evaluate your controller's performance.
 
-Webots supports multiple programming languages, see the <img src="https://www.cyberbotics.com/doc/guide/language-setup" alt="Webots documentation"></img> if you are interested.
+Webots supports multiple programming languages, see the [Webots documentation](https://www.cyberbotics.com/doc/guide/language-setup) if you are interested.
 Be sure to name your main controller like the default controller (except for the file extension) for it to be used in the leaderboard evaluation.
