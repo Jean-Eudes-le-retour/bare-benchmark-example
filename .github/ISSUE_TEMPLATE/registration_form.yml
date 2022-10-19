@@ -5,6 +5,14 @@ labels: [registration]
 title: "Registration to benchmark"
 
 body:
+- type: markdown
+  attributes:
+    value: |
+      #### Welcome to this benchmark!
+      Please enter your repository link in the box below and then click on "Sumbit new issue".
+      There will be several automated checks to see if your repository is correctly setup.
+      The automated actions might take a bit of time before showing any feedback so please be patient.
+      You can refresh the page after a minute to help new messages appear.
 - type: input
   id: repo_link
   attributes:
@@ -13,11 +21,3 @@ body:
     placeholder: https://github.com/USERNAME/REPOSITORY_NAME
   validations:
     required: true
-- type: markdown
-  attributes:
-    value: |
-      #### Welcome to this benchmark!
-      Please enter your repository link in the box above and then click on "Sumbit new issue".
-      There will be several automated checks to see if your repository is correctly setup.
-      The automated actions might take a bit of time before showing any feedback so please be patient.
-      You can refresh the page after a minute to help new messages appear.
