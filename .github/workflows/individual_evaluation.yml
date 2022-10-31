@@ -42,11 +42,13 @@ jobs:
 
       - name: Record and update Benchmark animations
         id: webots_test
-        uses: cyberbotics/benchmark-record-action@forkSystem 
-        with:
-          fetch_token: ${{ secrets.REPO_TOKEN }}
-          individual_evaluation: "${{ env.INDIVIDUAL_REF }}"
-          default_controller_name: ${{ env.DEFAULT_CONTROLLER }}
+        run: |
+          python3 -m benchmark_record_action
+        env:
+          INPUT_FETCH_TOKEN: ${{ secrets.REPO_TOKEN }}
+          INPUT_PUSH_TOKEN: ${{ github.token }}
+          INPUT_INDIVIDUAL_EVALUATION: ${{ env.INDIVIDUAL_REF }}
+          DEFAULT_CONTROLLER: ${{ env.DEFAULT_CONTROLLER }}
         continue-on-error: true
 
       - name: Feedback on success

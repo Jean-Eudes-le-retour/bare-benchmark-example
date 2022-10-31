@@ -4,26 +4,16 @@ from controller import Supervisor
 import os
 import sys
 
+# set to True if you want to generate an animation of your controller to ./storage/local
+RECORD_ANIMATION = True
+
+if RECORD_ANIMATION:
+    import recorder.recorder as rec
+
 def benchmarkPerformance(message, robot):
     benchmark_name = message.split(':')[1]
     benchmark_performance_string = message.split(':')[3]
     print(benchmark_name + ' Benchmark complete! Your performance was ' + benchmark_performance_string)
-    if robot.getFromDef("ANIMATION_RECORDER_SUPERVISOR"):
-        stop_recording(robot, message)
-
-def stop_recording(robot, message):
-    emitter = robot.getDevice('emitter')
-    emitter.send(message.encode('utf-8'))
-
-""" try:
-    includePath = "../../../include"
-    includePath.replace('/', os.sep)
-    sys.path.append(includePath)
-    from benchmark import benchmarkPerformance
-except ImportError:
-    print("error")
-    sys.stderr.write("Warning: 'benchmark' module not found.\n")
-    sys.exit(0) """
 
 robot = Supervisor()
 
@@ -32,9 +22,15 @@ timestep = int(robot.getBasicTimeStep())
 thymio = robot.getFromDef("BENCHMARK_ROBOT")
 translation = thymio.getField("translation")
 
+if RECORD_ANIMATION:
+    # Recorder code: wait for the controller to connect and start the animation
+    rec.animation_start_and_connection_wait(robot)
+    step_max = 1000 * rec.MAX_DURATION / timestep
+    step_counter = 0
+
 tx = 0
 running = True
-while robot.step(timestep) != -1:
+while robot.step(timestep) != -1 and running:
     t = translation.getSFVec3f()
     if running:
         percent = 1 - abs(0.25 + t[0]) / 0.25
@@ -53,14 +49,18 @@ while robot.step(timestep) != -1:
         message += ":" + str(percent)
         robot.wwiSendText(message)
         tx = t[0]
-    else:  # wait for record message
-        message = robot.wwiReceiveText()
-        while message:
-            if message.startswith("confirm:"):
-                print("WINDOW MESSAGE:", message)
-            """ if message.startswith("success:"):
-                benchmarkPerformance(message, robot)
-                break """
-            message = robot.wwiReceiveText()
+    if RECORD_ANIMATION:
+        # Stops the simulation if the controller takes too much time
+        step_counter += 1
+        if step_counter >= step_max:
+            break
+
+if RECORD_ANIMATION:
+    # Write performance to file, stop recording and close Webots
+    rec.record_performance(running, time)
+    rec.animation_stop(robot, timestep)
+    robot.simulationQuit(0)
+else:
+    benchmarkPerformance(message, robot)
 
 robot.simulationSetMode(Supervisor.SIMULATION_MODE_PAUSE)
